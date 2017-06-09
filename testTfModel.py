@@ -9,12 +9,12 @@ from config import *
 
 DIC_LABEL_FOLDER_MAP = DIC_LABEL_FOLDER_MAP_V13
 
-OPT_FALSE_FOLDER = os.path.join(OPT_FOLDER, OPT_TEST_FOLDER, os.path.split(TESTING_DATASET_PATH)[-1])
-MODEl_PATH = os.path.join(MODEL_WORKSPACE, TF_GRAPH_MODEL_NAME)
-LABEL_PATH = os.path.join(MODEL_WORKSPACE, TF_GRAPH_LABEL_NAME)
+#OPT_FALSE_FOLDER = os.path.join(OPT_FOLDER, OPT_TEST_FOLDER, os.path.split(TESTING_DATASET_PATH)[-1])
+MODEl_PATH = os.path.join(MODEL_WORKSPACE, TF_MODEL_NAME)
+LABEL_PATH = os.path.join(MODEL_WORKSPACE, TF_LABEL_NAME)
 
 OPT_RESULT_FOLDER = os.path.join(MODEL_WORKSPACE, "test_result_%s" % TESTING_DATASET_PATH.split("/")[-2])
-OPT_FALSE_FOLDER = os.path.join(OPT_RESULT_FOLDER, "false_result")
+#OPT_FALSE_FOLDER = os.path.join(OPT_RESULT_FOLDER, "false_result")
 OPT_FILE = os.path.join(OPT_RESULT_FOLDER, TEST_RESULT_FILE)
 
 SCORE_CRITERIA = 0.5
@@ -171,7 +171,7 @@ def measureModelPerformance(optLog, dicResult, dicLabelSet = DIC_LABEL_FOLDER_MA
     __printResult(allTP, allFP, allTN, allFN)
 
 def validateTfModel():
-    from retrainingExample import load_labels
+    from classifyImage import load_labels
     label_lines = load_labels(LABEL_PATH)
     print "Current labels : ", label_lines
 
