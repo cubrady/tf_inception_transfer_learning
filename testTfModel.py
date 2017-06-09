@@ -6,23 +6,14 @@ import progressbar
 import subprocess
 from util import *
 from config import *
-from modelVerLabels import *
-
-##############################################################
-# Path and test folder, analyzed image label predefinitions
-##############################################################
-TEST_FOLDER = "/data/deep_learning/dataset/test/pg_label_set/"
-MODEL_WORKSPACE = '/data/deep_learning/trainedModel/tf/pg_label_set/v13/'
 
 DIC_LABEL_FOLDER_MAP = DIC_LABEL_FOLDER_MAP_V13
 
-##############################################################
-
-OPT_FALSE_FOLDER = os.path.join(OPT_FOLDER, OPT_TEST_FOLDER, os.path.split(TEST_FOLDER)[-1])
+OPT_FALSE_FOLDER = os.path.join(OPT_FOLDER, OPT_TEST_FOLDER, os.path.split(TESTING_DATASET_PATH)[-1])
 MODEl_PATH = os.path.join(MODEL_WORKSPACE, TF_GRAPH_MODEL_NAME)
 LABEL_PATH = os.path.join(MODEL_WORKSPACE, TF_GRAPH_LABEL_NAME)
 
-OPT_RESULT_FOLDER = os.path.join(MODEL_WORKSPACE, "test_result_%s" % TEST_FOLDER.split("/")[-2])
+OPT_RESULT_FOLDER = os.path.join(MODEL_WORKSPACE, "test_result_%s" % TESTING_DATASET_PATH.split("/")[-2])
 OPT_FALSE_FOLDER = os.path.join(OPT_RESULT_FOLDER, "false_result")
 OPT_FILE = os.path.join(OPT_RESULT_FOLDER, TEST_RESULT_FILE)
 

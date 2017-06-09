@@ -99,9 +99,9 @@ def removeDuplicatedImage(src):
     print "Complete, %d images scanned, spend %f sec" % (len(lstFiles), (time.time() - start))
 
 if __name__ == '__main__':
-    src= "/data/deep_learning/dataset/training/pg_common_labels/travel"
-    count = 1000
-    dst = "/data/deep_learning/dataset/training/pycon_demo/travel"
+    src= "/data/deep_learning/dataset/training/pycon_2017_demo/unknown"
+    count = 200
+    dst = "/data/deep_learning/dataset/test/pycon_2017_demo/unknown"
     randomMoveFiles(src, count, dst)
 
 if __name__ == '__main__2':

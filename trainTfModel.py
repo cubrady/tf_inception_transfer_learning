@@ -1,15 +1,9 @@
 # -*- coding: utf8 -*-
 
 import os
+import time
 import argparse
-
-TF_PATH = "/home/brad_chang/proj/github/tensorflow/tensorflow"
-TRAINING_SRC = "/data/deep_learning/dataset/training/pg_common_labels/"
-TRAINED_MODEL_PATH = "/data/deep_learning/trainedModel/tf/pg_label_set"
-
-TF_MODEL_NAME = "output_graph.pb"
-TF_LABEL_NAME = "output_labels.txt"
-LOG_FOLDER = "retrain_logs"
+from config import TRAINING_DATASET_PATH, TF_MODEL_NAME, TF_LABEL_NAME, TF_PATH
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Tensorflow model training helper')
@@ -17,10 +11,12 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     currentVer = args.version
-    trainedModelPath = os.path.join(TRAINED_MODEL_PATH, "v%s" % currentVer)
+    trainedModelPath = os.path.join(TRAINING_DATASET_PATH, "v%s" % currentVer)
     os.makedirs(trainedModelPath)
 
-    cmdTrain = "cd %s && bazel-bin/tensorflow/examples/image_retraining/retrain —print_misclassified_test_images --image_dir %s" % (TF_PATH, TRAINING_SRC)
+    start = time.time()
+
+    cmdTrain = "cd %s && bazel-bin/tensorflow/examples/image_retraining/retrain —print_misclassified_test_images --image_dir %s" % (TF_PATH, TRAINING_DATASET_PATH)
     cmdCopyModel = "cp /tmp/%s %s" % (TF_MODEL_NAME, os.path.join(trainedModelPath, TF_MODEL_NAME))
     cmdCopyModelLabel = "cp /tmp/%s %s" % (TF_LABEL_NAME, os.path.join(trainedModelPath, TF_LABEL_NAME))
     cmdCopyModelLog = "cp -r /tmp/retrain_logs %s" % (trainedModelPath)
@@ -29,3 +25,5 @@ if __name__ == '__main__':
 
     for cmd in lstCmds:
         os.system(cmd)
+
+    print "Spend %f sec" % (time.time() - start)
