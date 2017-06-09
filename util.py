@@ -99,19 +99,19 @@ def removeDuplicatedImage(src):
     print "Complete, %d images scanned, spend %f sec" % (len(lstFiles), (time.time() - start))
 
 if __name__ == '__main__':
+    src= "/data/deep_learning/dataset/training/pg_common_labels/travel"
+    count = 1000
+    dst = "/data/deep_learning/dataset/training/pycon_demo/travel"
+    randomMoveFiles(src, count, dst)
+
+if __name__ == '__main__2':
     root = "/data/deep_learning/dataset/test/pg_label_set"
-    #removeDuplicatedImage(root)
+
+    removeDuplicatedImage(root)
+
     lstDirs = os.listdir(root)
     bar = progressbar.ProgressBar()
     for d in bar(lstDirs):
         print " >>>>>>>>>>>>>>>>> Processing : %s" % d
         removeDuplicatedImage(os.path.join(root, d))
         ensureImageFormatValid(os.path.join(root, d), validImageSet = [PIL_IMG_FORMAT_JPEG], delInvaidImageFile = True)
-
-    # randomMoveFiles(
-    #     "/data/deep_learning/dataset/training/pg_common_labels/flower", 2840/10,
-    #     "/data/deep_learning/dataset/test/pg_label_set/flower")
-
-    # lstPath = ['/home/brad_chang/deep_learning/dataset/training/pg_common_labels/dog']
-    # for p in lstPath:
-    #     ensureImageFormatValid(p, validImageSet = [PIL_IMG_FORMAT_JPEG], delInvaidImageFile = True)

@@ -213,4 +213,3 @@ def validateTfModel():
 
 if __name__ == '__main__':
     validateTfModel()
-    #test_nsfw_measureModelPerformance()
