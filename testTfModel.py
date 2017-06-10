@@ -26,9 +26,9 @@ def createResultOptFolder(folder, label):
 
 def testImages(label_lines, scoreCriteria = SCORE_CRITERIA):
     import progressbar
-    from retrainingExample import create_graph, analyzeIamge
+    from classifyImage import create_graph, analyzeIamge
     create_graph(MODEl_PATH)
-    checkFolder(OPT_FALSE_FOLDER)
+    #checkFolder(OPT_FALSE_FOLDER)
 
     optLog = open(OPT_FILE, 'w')
 
@@ -40,16 +40,16 @@ def testImages(label_lines, scoreCriteria = SCORE_CRITERIA):
             return
 
     logAndWriteFile(optLog, "Model:%s" % MODEl_PATH)
-    logAndWriteFile(optLog, "Test:%s" % TEST_FOLDER)
+    logAndWriteFile(optLog, "Test:%s" % TESTING_DATASET_PATH)
 
-    folders = os.listdir(TEST_FOLDER)
+    folders = os.listdir(TESTING_DATASET_PATH)
     allStart = time.time()
     dicAnalyzedResult = {}
     totlImgCount = 0
     folderCount = -1
     for folder in folders:
         folderCount += 1
-        folderPath = os.path.join(TEST_FOLDER, folder)
+        folderPath = os.path.join(TESTING_DATASET_PATH, folder)
         if not os.path.isdir(folderPath):
             print "[Warning] %s is not a valid folder" % folderPath
             continue
@@ -63,7 +63,7 @@ def testImages(label_lines, scoreCriteria = SCORE_CRITERIA):
         #falseLabelFolder = createResultOptFolder(OPT_FALSE_FOLDER, folder)
         imageList = os.listdir(folderPath)
 
-        logAndWriteFile(optLog, "\nStart to test %d images @ %s" % (len(imageList), os.path.join(TEST_FOLDER, folder)))
+        logAndWriteFile(optLog, "\nStart to test %d images @ %s" % (len(imageList), os.path.join(TESTING_DATASET_PATH, folder)))
         logAndWriteFile(optLog, " >>>>>>>>>>>>>>>> Category %s (%d/%d)" % (folder, folderCount, len(folders)))
 
         count = 0
@@ -175,7 +175,7 @@ def validateTfModel():
     label_lines = load_labels(LABEL_PATH)
     print "Current labels : ", label_lines
 
-    testFolders = os.listdir(TEST_FOLDER)
+    testFolders = os.listdir(TESTING_DATASET_PATH)
     valtestFolders = DIC_LABEL_FOLDER_MAP.keys()
     canGoTest = True
     for folder in valtestFolders:
