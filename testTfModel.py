@@ -136,14 +136,17 @@ def measureModelPerformance(optLog, dicResult, dicLabelSet = DIC_LABEL_FOLDER_MA
     logAndWriteFile(optLog, "\n" + "#" * 15 + " Model Performance Summary " + "#" * 15)
 
     def __calResult(TP, FP, TN, FN):
+        def __cal(a, b):
+            return 100.0 if b == 0 else a * 100 / float(b)
+            
         pa, pb = TP, TP + FP
-        precesion = 100.0 if pb == 0 else pa * 100 / float(pb)
+        precesion = __cal(pa, pb)
 
         aa, ab = TP + TN, TP + FP + TN + FN
-        accuracy = 100.0 if ab == 0 else (aa) * 100 / float(ab)
+        accuracy = __cal(aa, ab)
 
         ra, rb = TP, TP + FN
-        recall = 100.0 if (rb) == 0 else ( ra * 100 / float(rb) )
+        recall = __cal(ra, rb)
         return ((precesion, pa, pb), (accuracy, aa, ab), (recall, ra, rb))
 
     def __printResult(TP, FP, TN, FN):
